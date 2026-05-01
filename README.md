@@ -24,7 +24,7 @@ The long-term goal of Sivrus is to evolve into a personal automation assistant t
 ## ▶ Run
 
 ```bash
-python3 main.py
+docker compose up -d
 ````
 
 ---

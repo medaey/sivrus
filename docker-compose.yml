@@ -1,0 +1,12 @@
+services:
+  sivrus:
+    build: .
+    container_name: sivrus-app
+
+    environment:
+      - TASK_FILE=/app/data/dump.jsonl
+
+    volumes:
+      - ${TASK_FILE}:/app/data/dump.jsonl:ro
+      
+    restart: unless-stopped
