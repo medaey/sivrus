@@ -6,8 +6,6 @@ from task_reminder import get_old_tasks
 load_dotenv()
 
 webhook = os.getenv("DISCORD_WEBHOOK")
-username = os.getenv("DISCORD_USERNAME", "Notifier")
-
 interval = int(os.getenv("NOTIFICATION_INTERVAL_SECONDS", 3600))
 
 if not webhook:
@@ -21,5 +19,5 @@ while True:
 
     if tasks:
         msg = "\n".join(f"@here ⏰ {t['note']}" for t in tasks)
-        send_notification(webhook, msg, username)
+        send_notification(webhook, msg)
         print("Notification sent", flush=True)

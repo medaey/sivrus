@@ -3,7 +3,7 @@ import requests
 def send_discord_notification(
     webhook_url,
     content=None,
-    username="Notifier",
+    username="Sivrus",
     embed_title=None,
     embed_description=None
 ):
@@ -11,20 +11,29 @@ def send_discord_notification(
         "username": username
     }
 
-    # Message simple
+    # message texte
     if content:
         data["content"] = content
 
-    # Embed optionnel
+    # embed optionnel
     if embed_title or embed_description:
         data["embeds"] = [{
-            "title": embed_title,
-            "description": embed_description
+            "title": embed_title or "",
+            "description": embed_description or ""
         }]
 
     try:
-        response = requests.post(webhook_url, json=data)
+        response = requests.post(
+            webhook_url,
+            json=data,
+            timeout=10  # ✅ important
+        )
+
         response.raise_for_status()
-        return True, response.status_code
-    except requests.exceptions.HTTPError as err:
-        return False, str(err)
+
+        print(f"[DISCORD] Sent ({response.status_code})", flush=True)
+        return True
+
+    except requests.exceptions.RequestException as e:
+        print(f"[DISCORD ERROR] {e}", flush=True)
+        return False
