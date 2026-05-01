@@ -34,9 +34,18 @@ docker compose up -d
 Create a `.env` file:
 
 ```env id="env1"
+# DISCORD CONFIG
 DISCORD_WEBHOOK=https://discord.com/api/webhooks/XXXX/XXXX
-DISCORD_USERNAME=Sivrus
 
+# TASK SYSTEM
 TASK_FILE=/home/user/.fnote/dump.jsonl
+
+# OPTIONAL SETTINGS
 TASK_LIMIT_DAYS=14
+
+# NOTIFICATION SYSTEM
+# Options:
+# 86400 = 1 day
+# 3600  = 1 hour
+NOTIFICATION_INTERVAL_SECONDS=86400
 ```
